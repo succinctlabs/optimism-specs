@@ -13,7 +13,7 @@
     - [Client Implementation Considerations](#client-implementation-considerations)
 - [Fees](#fees)
   - [Fee Vaults](#fee-vaults)
-  - [Configurable fees (Configurable Fee Vault)](#configurable-fees-configurable-fee-vault)
+  - [Configurable fees](#configurable-fees)
     - [Configuring scalars](#configuring-scalars)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
