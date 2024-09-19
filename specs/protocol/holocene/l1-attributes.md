@@ -10,11 +10,12 @@
 
 ## Overview
 
-The L1 block attributes transaction is updated to include the EIP-1559 parameters.
+The L1 block attributes transaction is updated to include the EIP-1559 parameters and the extra scalars
+for the `configurableFee`.
 
 | Input arg         | Type    | Calldata bytes | Segment |
 | ----------------- | ------- | -------------- | ------- |
-| {0xd1fbe15b}      |         | 0-3            | n/a     |
+| {0xTOCHANGE}      |         | 0-3            | n/a     |
 | baseFeeScalar     | uint32  | 4-7            | 1       |
 | blobBaseFeeScalar | uint32  | 8-11           |         |
 | sequenceNumber    | uint64  | 12-19          |         |
@@ -26,3 +27,5 @@ The L1 block attributes transaction is updated to include the EIP-1559 parameter
 | batcherHash       | bytes32 | 132-163        | 5       |
 | eip1559Denominator   | uint64  | 164-171        | 6       |
 | eip1559Elasticity    | uint64  | 172-179        |         |
+| configurableFeeScalar  | uint64  | 180-187        |         |
+| configurableFeeConstant    | uint64  | 188-195        |         |

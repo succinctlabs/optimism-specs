@@ -11,6 +11,10 @@
     - [Rationale](#rationale)
     - [Forwards Compatibility Considerations](#forwards-compatibility-considerations)
     - [Client Implementation Considerations](#client-implementation-considerations)
+- [Fees](#fees)
+  - [Fee Vaults](#fee-vaults)
+  - [Configurable fees (Configurable FeeVault)](#configurable-fees-configurable-feevault)
+    - [Configuring scalars](#configuring-scalars)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -76,56 +80,43 @@ directly store this information.
 
 ## Fees
 
-Holocene adds 2 new components to the fee calculation: the `gas_premium_fee` and the `constant_fee`. 
-New OP stack variants have different resource consumption patterns, and thus require a more 
-flexible pricing model.
+Holocene adds a new component to the fee calculation: the `ConfigurableFee`. New OP stack variants
+have different resource consumption patterns, and thus require a more flexible pricing model.
 
 ### Fee Vaults
 
 In addition to the existing 3 fee vaults (The [`SequencerFeeVault`][sequencer-fee-vault]
-[`BaseFeeVault`][base-fee-vault], and the [`L1FeeVault`][l1feevault]), we add two
-new vaults for these new fees: the [`PremiumFeeVault`](predeploys.md#premiumfeevault) and the 
-[`ConstantFeeVault`](predeploys.md#constantfeevault). 
+[`BaseFeeVault`][base-fee-vault], and the [`L1FeeVault`][l1-fee-vault]), we add a
+new vault for these new fees: the [`ConfigurableFeeVault`](predeploys.md#configurablefeevault).
 
 Like the existing vaults, these are hardcoded addresses, pointing at pre-deployed proxy contracts.
 The proxies are backed by vault contract deployments, based on `FeeVault`, to route vault funds to L1 securely.
 
-| Vault Name          | Predeploy                                              |
-| ------------------- | ------------------------------------------------------ |
-| Premium Fee Vault    | [`PremiumFeeVault`](predeploys.md#premiumfeevault)       |
-| Constant Fee Vault  | [`ConstantFeeVault`](predeploys.md#constantfeevault)   |
+| Vault Name               | Predeploy                                              |
+| -------------------      | ------------------------------------------------------ |
+| Configurable Fee Vault   | [`ConfigurableFeeVault`](predeploys.md#premiumfeevault)       |
 
-
-### Premium gas fees (Premium Fee Vault)
+### Configurable fees (Configurable FeeVault)
 
 The premium gas fee is set as follows:
 
-`gas_premium_fee = gas_used * gas_used_scalar`
+`configurableFee = gas_used * configurableFeeScalar + configurableFeeConstant`
 
-Where: 
+Where:
+
 - `gas_used` is amount of gas used by the transaction.
-- `gas_premium_scalar` is a `uint256` scalar set by the chain operator. the same way that `baseFeeScalar` and 
-`blobBaseFeeScalar` are set in the [`L1Fee`](../../protocol/exec-engine.md#ecotone-l1-cost-fee-changes-eip-4844-da)
-calculation.
+- `configurableFeeScalar` is a `uint64` scalar set by the chain operator.
+- `configurableFeeConstant` is a `uint64` scalar set by the chain operator.
 
-### Constant fees (Constant Fee Vault)
+#### Configuring scalars
 
-The constant gas fee is set as follows: 
+`configurableFeeScalar` and `configurableFeeConstant` are loaded in a similar way to the `baseFeeScalar` and
+`blobBaseFeeScalar` used in the [`L1Fee`](../../protocol/exec-engine.md#ecotone-l1-cost-fee-changes-eip-4844-da).
+calculation. In more detail, these scalars can be accessed in two interchangable ways.
 
-`constant_gas_fee = constant_scalar`
-
-Where: 
-- `constant_scalar` is a `uint256` scalar set by the chain operator.
-
-#### Configuring scalars: 
-
-`gas_premium_scalar` and `constant_scalar` are loaded in a similar way to the `baseFeeScalar` and 
-`blobBaseFeeScalar` used in the [`L1Fee`](../../protocol/exec-engine.md#ecotone-l1-cost-fee-changes-eip-4844-da). 
-calculation. In more detail, these scalars can be accessed in two interchangable ways. 
-
-- read from the deposited L1 attributes (`gasPremiumScalar` and `constantScalar`) of the current L2 block
+- read from the deposited L1 attributes (`configurableFeeScalar` and `configurableFeeConstant`) of the current L2 block
 - read from the L1 Block Info contract (`0x4200000000000000000000000000000000000015`)
-  - using the respective solidity `uint256`-getter functions (`gasPremiumScalar`, `constantScalar`)
+  - using the respective solidity `uint256`-getter functions (`configurableFeeScalar`, `configurableFeeConstant`)
   - using direct storage-reads:
     - Gas premium scalar as big-endian `uint256` in slot `7`
     - Constant scalar as big-endian `uint256` in slot `8`
@@ -133,4 +124,3 @@ calculation. In more detail, these scalars can be accessed in two interchangable
 [sequencer-fee-vault]: ../../protocol/predeploys.md#sequencerfeevault
 [base-fee-vault]: ../../protocol/predeploys.md#basefeevault
 [l1-fee-vault]: ../../protocol/predeploys.md#l1feevault
-
