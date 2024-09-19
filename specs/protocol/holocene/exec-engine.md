@@ -96,7 +96,7 @@ The proxies are backed by vault contract deployments, based on `FeeVault`, to ro
 | -------------------      | ------------------------------------------------------ |
 | Configurable Fee Vault   | [`ConfigurableFeeVault`](predeploys.md#configurablefeevault)       |
 
-### Configurable fees (Configurable Fee Vault)
+### Configurable fees
 
 The configurable fee is set as follows:
 
@@ -107,6 +107,8 @@ Where:
 - `gas_used` is amount of gas used by the transaction.
 - `configurableFeeScalar` is a `uint64` scalar set by the chain operator.
 - `configurableFeeConstant` is a `uint64` scalar set by the chain operator.
+
+These collected fees are sent to the `SequencerFeeVault`.
 
 #### Configuring scalars
 

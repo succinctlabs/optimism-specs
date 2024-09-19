@@ -18,7 +18,6 @@
       - [`setBaseFeeVaultConfig`](#setbasefeevaultconfig)
       - [`setL1FeeVaultConfig`](#setl1feevaultconfig)
       - [`setSequencerFeeVaultConfig`](#setsequencerfeevaultconfig)
-      - [`setConfigurableFeeVaultConfig`](#setconfigurablefeevaultconfig)
 - [`OptimismPortal`](#optimismportal)
   - [Interface](#interface-1)
     - [`setConfig`](#setconfig)
@@ -42,11 +41,10 @@ The `ConfigType` enum represents configuration that can be modified.
 | `SET_BASE_FEE_VAULT_CONFIG` | `uint8(1)` | Sets the Fee Vault Config for the `BaseFeeVault` |
 | `SET_L1_FEE_VAULT_CONFIG` | `uint8(2)` | Sets the Fee Vault Config for the `L1FeeVault` |
 | `SET_SEQUENCER_FEE_VAULT_CONFIG` | `uint8(3)` | Sets the Fee Vault Config for the `SequencerFeeVault` |
-| `SET_CONFIGURABLE_FEE_VAULT_CONFIG` | `uint8(4)` | Sets the Fee Vault Config for the `ConfigurableFeeVault`|
-| `SET_L1_CROSS_DOMAIN_MESSENGER_ADDRESS` | `uint8(5)` | Sets the `L1CrossDomainMessenger` address |
-| `SET_L1_ERC_721_BRIDGE_ADDRESS` | `uint8(6)` | Sets the `L1ERC721Bridge` address |
-| `SET_L1_STANDARD_BRIDGE_ADDRESS` | `uint8(7)` | Sets the `L1StandardBridge` address |
-| `SET_REMOTE_CHAIN_ID` | `uint8(8)` | Sets the chain id of the base chain |
+| `SET_L1_CROSS_DOMAIN_MESSENGER_ADDRESS` | `uint8(4)` | Sets the `L1CrossDomainMessenger` address |
+| `SET_L1_ERC_721_BRIDGE_ADDRESS` | `uint8(5)` | Sets the `L1ERC721Bridge` address |
+| `SET_L1_STANDARD_BRIDGE_ADDRESS` | `uint8(6)` | Sets the `L1StandardBridge` address |
+| `SET_REMOTE_CHAIN_ID` | `uint8(7)` | Sets the chain id of the base chain |
 
 ## `SystemConfig`
 
@@ -75,7 +73,6 @@ The following actions should happen during the initialization of the `SystemConf
 - `setConfig(SET_BASE_FEE_VAULT_CONFIG)`
 - `setConfig(SET_L1_FEE_VAULT_CONFIG)`
 - `setConfig(SET_SEQUENCER_FEE_VAULT_CONFIG)`
-- `setConfig(SET_CONFIGURABLE_FEE_VAULT_CONFIG)`
 - `setConfig(SET_CONSTANT_FEE_VAULT_CONFIG)`
 - `setConfig(SET_L1_CROSS_DOMAIN_MESSENGER_ADDRESS)`
 - `setConfig(SET_L1_ERC_721_BRIDGE_ADDRESS)`
@@ -129,12 +126,6 @@ function setL1FeeVaultConfig(address,uint256,WithdrawalNetwork)
 
 ```solidity
 function setSequencerFeeVaultConfig(address,uint256,WithdrawalNetwork)
-```
-
-##### `setConfigurableFeeVaultConfig`
-
-```solidity
-function setConfigurableFeeVaultConfig(address,uint256,WithdrawalNetwork)
 ```
 
 ## `OptimismPortal`

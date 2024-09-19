@@ -17,7 +17,6 @@
       - [`baseFeeVaultConfig`](#basefeevaultconfig)
       - [`sequencerFeeVaultConfig`](#sequencerfeevaultconfig)
       - [`l1FeeVaultConfig`](#l1feevaultconfig)
-      - [`configurableFeeVaultConfig`](#configurablefeevaultconfig)
       - [`l1CrossDomainMessenger`](#l1crossdomainmessenger)
       - [`l1StandardBridge`](#l1standardbridge)
       - [`l1ERC721Bridge`](#l1erc721bridge)
@@ -25,7 +24,6 @@
   - [FeeVault](#feevault)
     - [Interface](#interface-1)
       - [`config`](#config)
-  - [ConfigurableFeeVault](#configurablefeevault)
   - [L2CrossDomainMessenger](#l2crossdomainmessenger)
     - [Interface](#interface-2)
   - [L2ERC721Bridge](#l2erc721bridge)
@@ -55,7 +53,6 @@ of the `SystemConfig`.
 | `BASE_FEE_VAULT_CONFIG` | `bytes32(uint256(keccak256("opstack.basefeevaultconfig")) - 1)` | The Fee Vault Config for the `BaseFeeVault` |
 | `L1_FEE_VAULT_CONFIG` | `bytes32(uint256(keccak256("opstack.l1feevaultconfig")) - 1)` | The Fee Vault Config for the `L1FeeVault` |
 | `SEQUENCER_FEE_VAULT_CONFIG` | `bytes32(uint256(keccak256("opstack.sequencerfeevaultconfig")) - 1)` | The Fee Vault Config for the `SequencerFeeVault` |
-| `CONFIGURABLE_FEE_VAULT_CONFIG` | `bytes32(uint256(keccak256("opstack.configurablefeevaultconfig")) - 1)` | The Fee Vault Config for the `ConfigurableFeeVault` |
 | `L1_CROSS_DOMAIN_MESSENGER_ADDRESS` | `bytes32(uint256(keccak256("opstack.l1crossdomainmessengeraddress")) - 1)` | `abi.encode(address(L1CrossDomainMessengerProxy))` |
 | `L1_ERC_721_BRIDGE_ADDRESS` | `bytes32(uint256(keccak256("opstack.l1erc721bridgeaddress")) - 1)` | `abi.encode(address(L1ERC721BridgeProxy))` |
 | `L1_STANDARD_BRIDGE_ADDRESS` | `bytes32(uint256(keccak256("opstack.l1standardbridgeaddress")) - 1)` | `abi.encode(address(L1StandardBridgeProxy))` |
@@ -94,7 +91,6 @@ The following storage slots are defined:
 - `BASE_FEE_VAULT_CONFIG`
 - `L1_FEE_VAULT_CONFIG`
 - `SEQUENCER_FEE_VAULT_CONFIG`
-- `CONFIGURABLE_FEE_VAULT_CONFIG`
 - `L1_CROSS_DOMAIN_MESSENGER_ADDRESS`
 - `L1_ERC_721_BRIDGE_ADDRESS`
 - `L1_STANDARD_BRIDGE_ADDRESS`
@@ -172,14 +168,6 @@ This function MUST be called by the `L1FeeVault` to fetch network specific confi
 function l1FeeVaultConfig()(address,uint256,WithdrawalNetwork)
 ```
 
-##### `configurableFeeVaultConfig`
-
-This function MUST be called by the `ConfigurableFeeVault` to fetch network specific configuration.
-
-```solidity
-function configurableFeeVaultConfig()(address,uint256,WithdrawalNetwork)
-```
-
 ##### `l1CrossDomainMessenger`
 
 This function MUST be called by the `L2CrossDomainMessenger` to fetch the address of the `L1CrossDomainMessenger`.
@@ -215,8 +203,7 @@ function remoteChainId()(uint256)
 
 ### FeeVault
 
-The following changes apply to each of the `BaseFeeVault`, the `L1FeeVault` the `SequencerFeeVault`, and the new
-`ConfigurableFeeVault`.
+The following changes apply to each of the `BaseFeeVault`, the `L1FeeVault`, and the `SequencerFeeVault`.
 
 #### Interface
 
@@ -232,7 +219,6 @@ The following functions are updated to read from the `L1Block` contract:
 | `BaseFeeVault` | `L1Block.baseFeeVaultConfig()` |
 | `SequencerFeeVault` | `L1Block.sequencerFeeVaultConfig()` |
 | `L1FeeVault` | `L1Block.l1FeeVaultConfig()` |
-| `ConfigurableFeeVault` | `L1Block.configurableFeeVaultConfig()` |
 
 ##### `config`
 
@@ -241,11 +227,6 @@ A new function is added to fetch the full Fee Vault Config.
 ```solidity
 function config()(address,uint256,WithdrawalNetwork)
 ```
-
-### ConfigurableFeeVault
-
-This vault implements `FeeVault`, like `BaseFeeVault`, `SequencerFeeVault`, and `L1FeeVault`. No special logic is
-needed in order to insert or withdraw funds.
 
 ### L2CrossDomainMessenger
 
