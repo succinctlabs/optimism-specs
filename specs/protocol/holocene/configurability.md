@@ -75,7 +75,7 @@ The following actions should happen during the initialization of the `SystemConf
 - `setConfig(SET_BASE_FEE_VAULT_CONFIG)`
 - `setConfig(SET_L1_FEE_VAULT_CONFIG)`
 - `setConfig(SET_SEQUENCER_FEE_VAULT_CONFIG)`
-- `setConfig(SET_GAS_PREMIUM_FEE_VAULT_CONFIG)`
+- `setConfig(SET_CONFIGURABLE_FEE_VAULT_CONFIG)`
 - `setConfig(SET_CONSTANT_FEE_VAULT_CONFIG)`
 - `setConfig(SET_L1_CROSS_DOMAIN_MESSENGER_ADDRESS)`
 - `setConfig(SET_L1_ERC_721_BRIDGE_ADDRESS)`

@@ -25,6 +25,7 @@
   - [FeeVault](#feevault)
     - [Interface](#interface-1)
       - [`config`](#config)
+  - [ConfigurableFeeVault](#configurablefeevault)
   - [L2CrossDomainMessenger](#l2crossdomainmessenger)
     - [Interface](#interface-2)
   - [L2ERC721Bridge](#l2erc721bridge)
@@ -240,6 +241,11 @@ A new function is added to fetch the full Fee Vault Config.
 ```solidity
 function config()(address,uint256,WithdrawalNetwork)
 ```
+
+### ConfigurableFeeVault
+
+This vault implements `FeeVault`, like `BaseFeeVault`, `SequencerFeeVault`, and `L1FeeVault`. No special logic is
+needed in order to insert or withdraw funds.
 
 ### L2CrossDomainMessenger
 
