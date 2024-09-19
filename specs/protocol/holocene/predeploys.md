@@ -214,7 +214,8 @@ function remoteChainId()(uint256)
 
 ### FeeVault
 
-The following changes apply to each of the `BaseFeeVault`, the `L1FeeVault` the `SequencerFeeVault`.
+The following changes apply to each of the `BaseFeeVault`, the `L1FeeVault` the `SequencerFeeVault`, and the new
+`ConfigurableFeeVault`.
 
 #### Interface
 
@@ -230,6 +231,7 @@ The following functions are updated to read from the `L1Block` contract:
 | `BaseFeeVault` | `L1Block.baseFeeVaultConfig()` |
 | `SequencerFeeVault` | `L1Block.sequencerFeeVaultConfig()` |
 | `L1FeeVault` | `L1Block.l1FeeVaultConfig()` |
+| `ConfigurableFeeVault` | `L1Block.configurableFeeVaultConfig()` |
 
 ##### `config`
 
