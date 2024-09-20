@@ -4,13 +4,6 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [`L2ToL1MessagePasser` Storage Root in Header](#l2tol1messagepasser-storage-root-in-header)
-  - [Timestamp Activation](#timestamp-activation)
-  - [Header Validity Rules](#header-validity-rules)
-  - [Header Withdrawals Root](#header-withdrawals-root)
-    - [Rationale](#rationale)
-    - [Forwards Compatibility Considerations](#forwards-compatibility-considerations)
-    - [Client Implementation Considerations](#client-implementation-considerations)
 - [Fees](#fees)
   - [Configurable fees](#configurable-fees)
     - [Configuring scalars](#configuring-scalars)

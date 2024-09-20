@@ -12,6 +12,7 @@
 This document is not finalized and should be considered experimental.
 
 ## Execution Layer
+
 - [Configurable Fee](./exec-engine.md#fees)
 
 ## Consensus Layer
