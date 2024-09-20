@@ -4,8 +4,9 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [Scalars](#scalars)
-  - [Isthmus `scalar`, `overhead` (`uint256,uint256`) change](#isthmus-scalar-overhead-uint256uint256-change)
+- [System config contents (version 0)](#system-config-contents-version-0)
+  - [Scalars](#scalars)
+    - [Isthmus `scalar`, `overhead` (`uint256,uint256`) change](#isthmus-scalar-overhead-uint256uint256-change)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
