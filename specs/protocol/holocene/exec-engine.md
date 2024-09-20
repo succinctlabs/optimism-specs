@@ -12,7 +12,6 @@
     - [Forwards Compatibility Considerations](#forwards-compatibility-considerations)
     - [Client Implementation Considerations](#client-implementation-considerations)
 - [Fees](#fees)
-  - [Fee Vaults](#fee-vaults)
   - [Configurable fees](#configurable-fees)
     - [Configuring scalars](#configuring-scalars)
 
@@ -83,19 +82,6 @@ directly store this information.
 Holocene adds a new component to the fee calculation: the `ConfigurableFee`. New OP stack variants
 have different resource consumption patterns, and thus require a more flexible pricing model.
 
-### Fee Vaults
-
-In addition to the existing 3 fee vaults (The [`SequencerFeeVault`][sequencer-fee-vault],
-[`BaseFeeVault`][base-fee-vault], and the [`L1FeeVault`][l1-fee-vault]), we add a
-new vault for the `ConfigurableFee`: the [`ConfigurableFeeVault`](predeploys.md#configurablefeevault).
-
-Like the existing vaults, these are hardcoded addresses, pointing at pre-deployed proxy contracts.
-The proxies are backed by vault contract deployments, based on `FeeVault`, to route vault funds to L1 securely.
-
-| Vault Name               | Predeploy                                              |
-| -------------------      | ------------------------------------------------------ |
-| Configurable Fee Vault   | [`ConfigurableFeeVault`](predeploys.md#configurablefeevault)       |
-
 ### Configurable fees
 
 The configurable fee is set as follows:
@@ -118,11 +104,7 @@ calculation. In more detail, these scalars can be accessed in two interchangable
 
 - read from the deposited L1 attributes (`configurableFeeScalar` and `configurableFeeConstant`) of the current L2 block
 - read from the L1 Block Info contract (`0x4200000000000000000000000000000000000015`)
-  - using the respective solidity `uint64`-getter functions (`configurableFeeScalar`, `configurableFeeConstant`)
+  - using the respective solidity getter functions (`configurableFeeScalar`, `configurableFeeConstant`)
   - using direct storage-reads:
-    - Configurable fee scalar as big-endian `uint64` in slot `7`
-    - Configurable fee constant as big-endian `uint64` in slot `8`
-
-[sequencer-fee-vault]: ../../protocol/predeploys.md#sequencerfeevault
-[base-fee-vault]: ../../protocol/predeploys.md#basefeevault
-[l1-fee-vault]: ../../protocol/predeploys.md#l1feevault
+    - Configurable fee scalar as big-endian `uint64` in slot `8` at offset `16`.
+    - Configurable fee constant as big-endian `uint64` in slot `8` at offset `0`.
