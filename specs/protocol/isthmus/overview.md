@@ -19,4 +19,4 @@ This document is not finalized and should be considered experimental.
 
 - [L1 Block Attributes](./l1-attributes.md)
 - [Configurability](./configurability.md)
-- [Interop](../interop/overview.md)
+- [Interop](../../interop/overview.md)
