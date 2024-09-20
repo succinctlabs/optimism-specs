@@ -13,7 +13,7 @@
 
 ### `ConfigUpdate`
 
-The following `ConfigUpdate` enum is defined where the `CONFIG_VERSION` is `uint256(0)`:
+The following `ConfigUpdate` enum is defined where the `CONFIG_VERSION` is `uint256(1)`:
 
 | Name | Value | Definition | Usage |
 | ---- | ----- | --- | -- |
