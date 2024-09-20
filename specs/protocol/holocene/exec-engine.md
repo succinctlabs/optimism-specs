@@ -106,5 +106,5 @@ calculation. In more detail, these scalars can be accessed in two interchangable
 - read from the L1 Block Info contract (`0x4200000000000000000000000000000000000015`)
   - using the respective solidity getter functions (`configurableFeeScalar`, `configurableFeeConstant`)
   - using direct storage-reads:
-    - Configurable fee scalar as big-endian `uint64` in slot `8` at offset `16`.
-    - Configurable fee constant as big-endian `uint64` in slot `8` at offset `0`.
+    - Configurable fee scalar as big-endian `uint64` in slot `3` at offset `24`.
+    - Configurable fee constant as big-endian `uint64` in slot `3` at offset `16`.
