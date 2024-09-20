@@ -203,7 +203,7 @@ function remoteChainId()(uint256)
 
 ### FeeVault
 
-The following changes apply to each of the `BaseFeeVault`, the `L1FeeVault`, and the `SequencerFeeVault`.
+The following changes apply to each of the `BaseFeeVault`, the `L1FeeVault` and the `SequencerFeeVault`.
 
 #### Interface
 
