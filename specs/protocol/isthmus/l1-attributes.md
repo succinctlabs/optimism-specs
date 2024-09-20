@@ -15,7 +15,7 @@ for the `configurableFee`.
 
 | Input arg         | Type    | Calldata bytes | Segment |
 | ----------------- | ------- | -------------- | ------- |
-| {0xd1fbe15b}      |         | 0-3            | n/a     |
+| {0x098999be}      |         | 0-3            | n/a     |
 | baseFeeScalar     | uint32  | 4-7            | 1       |
 | blobBaseFeeScalar | uint32  | 8-11           |         |
 | sequenceNumber    | uint64  | 12-19          |         |
