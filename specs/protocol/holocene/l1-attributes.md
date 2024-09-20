@@ -10,8 +10,7 @@
 
 ## Overview
 
-The L1 block attributes transaction is updated to include the EIP-1559 parameters and the extra scalars
-for the `configurableFee`.
+The L1 block attributes transaction is updated to include the EIP-1559 parameters.
 
 | Input arg         | Type    | Calldata bytes | Segment |
 | ----------------- | ------- | -------------- | ------- |
@@ -27,14 +26,3 @@ for the `configurableFee`.
 | batcherHash       | bytes32 | 132-163        | 5       |
 | eip1559Denominator   | uint64  | 164-171        | 6       |
 | eip1559Elasticity    | uint64  | 172-179        |         |
-| configurableFeeScalar  | uint64  | 180-187        |         |
-| configurableFeeConstant    | uint64  | 188-195        |         |
-
-In the first L2 block after the Holocene activation block, the Holocene L1 attributes are first used.
-
-The pre-Holocene values are migrated over 1:1.
-Blocks after the Holocene activation block contain all pre-Holocene values 1:1,
-and also set the following new attributes:
-
-- The `configurableFeeScalar` is set to `0`.
-- The `configurableFeeConstant` is set to `0`.
