@@ -14,7 +14,7 @@
 
 ### Scalars
 
-In order to allow rollup operators to adjust the new `ConfigurableFeeScalar` and `ConfigurableFeeConstant`, a change to
+In order to allow rollup operators to adjust the new `operatorFeeScalar` and `operatorFeeConstant`, a change to
 the `scalar` and `overhead` encoding is necessary.
 
 #### Isthmus `scalar`, `overhead` (`uint256,uint256`) change
@@ -29,11 +29,11 @@ After Isthmus activation:
 - `[1, 32)`: depending scalar-version:
   - Scalar-version `2`:
     - `[1, 8)`: padding, must be zero.
-    - `[8, 16)`: big-endian `uint64`, encoding the `configurableFeeScalar`
-    - `[16, 24)`: big-endian `uint64`, encoding the `configurableFeeConstant`
+    - `[12, 16)`: big-endian `uint32`, encoding the `operatorFeeScalar`
+    - `[16, 24)`: big-endian `uint64`, encoding the `operatorFeeConstant`
     - `[24, 28)`: big-endian `uint32`, encoding the `blobBaseFeeScalar`
     - `[28, 32)`: big-endian `uint32`, encoding the `baseFeeScalar`
-    - This version adds the `configurableFeeScalar` and the `configurableFeeConstant`.
+    - This version adds the `operatorFeeScalar` and the `operatorFeeConstant`.
 
-The `configurableFeeScalar` and `configurableFeeConstant` are incorporated into the L2 through the
+The `operatorFeeScalar` and `operatorFeeConstant` are incorporated into the L2 through the
 [Isthmus L1 attributes deposit transaction calldata](l1-attributes.md).

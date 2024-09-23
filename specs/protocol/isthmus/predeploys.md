@@ -12,7 +12,8 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-Since we now need to include the configurable fee scalars in the L1 Attri
+Since we now need to include the operator fee scalars in the L1 Attributes, we need new methods to
+`L1Block` in order to set the new scalars.
 
 ## Predeploys
 
