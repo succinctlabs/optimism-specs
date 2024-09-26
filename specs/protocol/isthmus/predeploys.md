@@ -5,8 +5,11 @@
 **Table of Contents**
 
 - [Predeploys](#predeploys)
-  - [L1Block](#l1block)
+  - [GasPriceOracle](#gaspriceoracle)
     - [Interface](#interface)
+      - [`getOperatorFee`](#getoperatorfee)
+  - [L1Block](#l1block)
+    - [Interface](#interface-1)
       - [`setL1BlockValuesIsthmus`](#setl1blockvaluesisthmus)
       - [`setIsthmus`](#setisthmus)
 
@@ -16,6 +19,21 @@ Since we now need to include the operator fee scalars in the L1 Attributes, we n
 `L1Block` in order to set the new scalars.
 
 ## Predeploys
+
+### GasPriceOracle
+
+In order to maintain accurate offchain fee estimation, the `GasPriceOracle` must be updated to allow users
+to estimate the operator fee.
+
+#### Interface
+
+##### `getOperatorFee`
+
+This function calculates the operator fee based on the expected amount of gas used for a certain transaction.
+
+```function
+function getOperatorFee(uint256 gasUsed)(uint256)
+```
 
 ### L1Block
 

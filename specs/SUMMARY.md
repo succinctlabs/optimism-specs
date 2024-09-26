@@ -57,9 +57,10 @@
       - [L1 Block Attributes](./protocol/holocene/l1-attributes.md)
       - [Configurability](./protocol/holocene/configurability.md)
     - [Isthmus](./protocol/isthmus/overview.md)
+      - [Configurability](./protocol/isthmus/configurability.md)
+      - [Derivation](./protocol/holocene/derivation.md)
       - [Execution Engine](./protocol/isthmus/exec-engine.md)
       - [L1 Block Attributes](./protocol/isthmus/l1-attributes.md)
-      - [Configurability](./protocol/isthmus/configurability.md)
       - [Predeploys](./protocol/isthmus/predeploys.md)
       - [System Config](./protocol/isthmus/system-config.md)
 

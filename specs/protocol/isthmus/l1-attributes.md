@@ -25,11 +25,11 @@ for the `operatorFee`.
 | blobBaseFee       | uint256 | 68-99          | 3       |
 | l1BlockHash       | bytes32 | 100-131        | 4       |
 | batcherHash       | bytes32 | 132-163        | 5       |
-| eip1559Denominator   | uint64  | 164-171        | 6       |
-| eip1559Elasticity    | uint64  | 172-179        |         |
-| operatorFeeScalar  | uint32  | 180-183        |         |
-| operatorFeeConstant    | uint64  | 184-191        |         |
-| UNUSED: MUST BE ZERO   | uint32  | 192-195        |         |
+| eip1559Denominator   | uint64  | 164-171     | 6       |
+| eip1559Elasticity    | uint64  | 172-179     |         |
+| operatorFeeScalar    | uint32  | 180-183     |         |
+| operatorFeeConstant    | uint64  | 184-191   |         |
+| UNUSED: MUST BE ZERO   | uint32  | 192-195   |         |
 
 In the first L2 block after the Isthmus activation block, the Isthmus L1 attributes are first used.
 
