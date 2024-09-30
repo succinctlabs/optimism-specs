@@ -6,7 +6,7 @@
 
 - [System config contents (version 0)](#system-config-contents-version-0)
   - [Scalars](#scalars)
-    - [Isthmus `scalar`, `overhead` (`uint256,uint256`) change](#isthmus-scalar-overhead-uint256uint256-change)
+    - [Holocene `scalar`, `overhead` (`uint256,uint256`) change](#holocene-scalar-overhead-uint256uint256-change)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -17,9 +17,9 @@
 In order to allow rollup operators to adjust the new `operatorFeeScalar` and `operatorFeeConstant`, a change to
 the `scalar` and `overhead` encoding is necessary.
 
-#### Isthmus `scalar`, `overhead` (`uint256,uint256`) change
+#### Holocene `scalar`, `overhead` (`uint256,uint256`) change
 
-After Isthmus activation:
+After Holocene activation:
 
 - A new version to the `scalar` encoding is added. It is described as follows.
 
@@ -36,4 +36,4 @@ After Isthmus activation:
     - This version adds the `operatorFeeScalar` and the `operatorFeeConstant`.
 
 The `operatorFeeScalar` and `operatorFeeConstant` are incorporated into the L2 through the
-[Isthmus L1 attributes deposit transaction calldata](l1-attributes.md).
+[Holocene L1 attributes deposit transaction calldata](l1-attributes.md).

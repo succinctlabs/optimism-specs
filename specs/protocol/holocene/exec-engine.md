@@ -82,7 +82,7 @@ directly store this information.
 ## Fees
 
 New OP stack variants have different resource consumption patterns, and thus require a more flexible
-pricing model. To enable more customizable fee structures, Isthmus adds a new component to the fee
+pricing model. To enable more customizable fee structures, Holocene adds a new component to the fee
 calculation: the `operatorFee`, which is parameterized by two scalars: the `operatorFeeScalar`
 and the `operatorFeeConstant`.
 
