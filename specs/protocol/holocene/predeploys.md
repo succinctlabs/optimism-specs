@@ -24,12 +24,15 @@
   - [FeeVault](#feevault)
     - [Interface](#interface-1)
       - [`config`](#config)
-  - [L2CrossDomainMessenger](#l2crossdomainmessenger)
+  - [GasPriceOracle](#gaspriceoracle)
     - [Interface](#interface-2)
-  - [L2ERC721Bridge](#l2erc721bridge)
+      - [`getOperatorFee`](#getoperatorfee)
+  - [L2CrossDomainMessenger](#l2crossdomainmessenger)
     - [Interface](#interface-3)
-  - [L2StandardBridge](#l2standardbridge)
+  - [L2ERC721Bridge](#l2erc721bridge)
     - [Interface](#interface-4)
+  - [L2StandardBridge](#l2standardbridge)
+    - [Interface](#interface-5)
   - [OptimismMintableERC721Factory](#optimismmintableerc721factory)
 - [Security Considerations](#security-considerations)
   - [GovernanceToken](#governancetoken)
@@ -226,6 +229,21 @@ A new function is added to fetch the full Fee Vault Config.
 
 ```solidity
 function config()(address,uint256,WithdrawalNetwork)
+```
+
+### GasPriceOracle
+
+In order to maintain accurate offchain fee estimation, the `GasPriceOracle` must be updated to allow users
+to estimate the operator fee.
+
+#### Interface
+
+##### `getOperatorFee`
+
+This function calculates the operator fee based on the expected amount of gas used for a certain transaction.
+
+```function
+function getOperatorFee(uint256 gasUsed)(uint256)
 ```
 
 ### L2CrossDomainMessenger
