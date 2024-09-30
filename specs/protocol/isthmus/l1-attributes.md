@@ -29,7 +29,6 @@ for the `operatorFee`.
 | eip1559Elasticity    | uint64  | 172-179     |         |
 | operatorFeeScalar    | uint32  | 180-183     |         |
 | operatorFeeConstant    | uint64  | 184-191   |         |
-| UNUSED: MUST BE ZERO   | uint32  | 192-195   |         |
 
 In the first L2 block after the Isthmus activation block, the Isthmus L1 attributes are first used.
 
