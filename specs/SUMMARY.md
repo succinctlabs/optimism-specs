@@ -54,9 +54,9 @@
       - [Derivation](./protocol/holocene/derivation.md)
       - [Execution Engine](./protocol/holocene/exec-engine.md)
       - [Predeploys](./protocol/holocene/predeploys.md)
-      - [L1 Block Attributes](./protocol/holocene/l1-attributes.md)
       - [Configurability](./protocol/holocene/configurability.md)
       - [System Config](./protocol/holocene/system-config.md)
+      - [L1 Attributes](./protocol/holocene/l1-attributes.md)
 
 - [Governance]()
   - [Governance Token](./governance/gov-token.md)

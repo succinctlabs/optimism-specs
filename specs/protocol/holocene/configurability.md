@@ -14,10 +14,13 @@
   - [Interface](#interface)
     - [EIP-1559 Params](#eip-1559-params)
       - [`setEIP1559Params`](#seteip1559params)
+      - [`eip1559Elasticity`](#eip1559elasticity)
+      - [`eip1559Denominator`](#eip1559denominator)
     - [Fee Vault Config](#fee-vault-config)
       - [`setBaseFeeVaultConfig`](#setbasefeevaultconfig)
       - [`setL1FeeVaultConfig`](#setl1feevaultconfig)
       - [`setSequencerFeeVaultConfig`](#setsequencerfeevaultconfig)
+      - [`setOperatorFeeVaultConfig`](#setoperatorfeevaultconfig)
 - [`OptimismPortal`](#optimismportal)
   - [Interface](#interface-1)
     - [`setConfig`](#setconfig)
@@ -41,16 +44,17 @@ The `ConfigType` enum represents configuration that can be modified.
 | `SET_BASE_FEE_VAULT_CONFIG` | `uint8(1)` | Sets the Fee Vault Config for the `BaseFeeVault` |
 | `SET_L1_FEE_VAULT_CONFIG` | `uint8(2)` | Sets the Fee Vault Config for the `L1FeeVault` |
 | `SET_SEQUENCER_FEE_VAULT_CONFIG` | `uint8(3)` | Sets the Fee Vault Config for the `SequencerFeeVault` |
-| `SET_L1_CROSS_DOMAIN_MESSENGER_ADDRESS` | `uint8(4)` | Sets the `L1CrossDomainMessenger` address |
-| `SET_L1_ERC_721_BRIDGE_ADDRESS` | `uint8(5)` | Sets the `L1ERC721Bridge` address |
-| `SET_L1_STANDARD_BRIDGE_ADDRESS` | `uint8(6)` | Sets the `L1StandardBridge` address |
-| `SET_REMOTE_CHAIN_ID` | `uint8(7)` | Sets the chain id of the base chain |
+| `SET_OPERATOR_FEE_VAULT_CONFIG` | `uint8(4)` | Sets the Fee Vault Config for the `OperatorFeeVault` |
+| `SET_L1_CROSS_DOMAIN_MESSENGER_ADDRESS` | `uint8(5)` | Sets the `L1CrossDomainMessenger` address |
+| `SET_L1_ERC_721_BRIDGE_ADDRESS` | `uint8(6)` | Sets the `L1ERC721Bridge` address |
+| `SET_L1_STANDARD_BRIDGE_ADDRESS` | `uint8(7)` | Sets the `L1StandardBridge` address |
+| `SET_REMOTE_CHAIN_ID` | `uint8(8)` | Sets the chain id of the base chain |
 
 ## `SystemConfig`
 
 ### `ConfigUpdate`
 
-The following `ConfigUpdate` enum is defined where the `CONFIG_VERSION` is `uint256(0)`:
+The following `ConfigUpdate` event is defined where the `CONFIG_VERSION` is `uint256(0)`:
 
 | Name | Value | Definition | Usage |
 | ---- | ----- | --- | -- |
@@ -58,7 +62,7 @@ The following `ConfigUpdate` enum is defined where the `CONFIG_VERSION` is `uint
 | `FEE_SCALARS` | `uint8(1)` | `(uint256(0x01) << 248) \| (uint256(_operatorFeeScalar) <<  108 \| (uint256(_operatorFeeConstant) << 96 \| (uint256(_blobBaseFeeScalar) << 32) \| _baseFeeScalar` | Modifies the fee scalars |
 | `GAS_LIMIT` | `uint8(2)` | `abi.encode(uint64 _gasLimit)` | Modifies the L2 gas limit |
 | `UNSAFE_BLOCK_SIGNER` | `uint8(3)` | `abi.encode(address)` | Modifies the account that is authorized to progress the unsafe chain |
-| `EIP_1559_PARAMS` | `uint8(4)` | `uint256(uint64(_denominator)) << 32 \| uint64(_elasticity)` | Modifies the EIP-1559 denominator and elasticity |
+| `EIP_1559_PARAMS` | `uint8(4)` | `uint256(uint64(uint32(_denominator))) << 32 \| uint64(uint32(_elasticity))` | Modifies the EIP-1559 denominator and elasticity |
 
 ### Initialization
 
@@ -73,6 +77,7 @@ The following actions should happen during the initialization of the `SystemConf
 - `setConfig(SET_BASE_FEE_VAULT_CONFIG)`
 - `setConfig(SET_L1_FEE_VAULT_CONFIG)`
 - `setConfig(SET_SEQUENCER_FEE_VAULT_CONFIG)`
+- `setConfig(SET_OPERATOR_FEE_VAULT_CONFIG)`
 - `setConfig(SET_L1_CROSS_DOMAIN_MESSENGER_ADDRESS)`
 - `setConfig(SET_L1_ERC_721_BRIDGE_ADDRESS)`
 - `setConfig(SET_L1_STANDARD_BRIDGE_ADDRESS)`
@@ -95,11 +100,27 @@ operator to modify the `BASE_FEE_MAX_CHANGE_DENOMINATOR` and the `ELASTICITY_MUL
 This function MUST only be callable by the chain governor.
 
 ```solidity
-function setEIP1559Params(uint64 _denominator, uint64 _elasticity)
+function setEIP1559Params(uint32 _denominator, uint32 _elasticity)
 ```
 
 The `_denominator` and `_elasticity` MUST be set to values greater to than 0.
 It is possible for the chain operator to set EIP-1559 parameters that result in poor user experience.
+
+##### `eip1559Elasticity`
+
+This function returns the currently configured EIP-1559 elasticity.
+
+```solidity
+function eip1559Elasticity()(uint64)
+```
+
+##### `eip1559Denominator`
+
+This function returns the currently configured EIP-1559 denominator.
+
+```solidity
+function eip1559Denominator()(uint64)
+```
 
 #### Fee Vault Config
 
@@ -125,6 +146,12 @@ function setL1FeeVaultConfig(address,uint256,WithdrawalNetwork)
 
 ```solidity
 function setSequencerFeeVaultConfig(address,uint256,WithdrawalNetwork)
+```
+
+##### `setOperatorFeeVaultConfig`
+
+```solidity
+function setOperatorFeeVaultConfig(address,uint256,WithdrawalNetwork)
 ```
 
 ## `OptimismPortal`
