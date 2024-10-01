@@ -163,7 +163,7 @@ and the `operatorFeeConstant`.
 
 ### Operator fees
 
-The operator fee, in wei, is set as follows:
+The operator fee, is set as follows:
 
 `operatorFee = (gasUsed * operatorFeeScalar / 1e6) + operatorFeeConstant`
 
@@ -190,5 +190,5 @@ calculation. In more detail, these scalars can be accessed in two interchangable
 
 These collected fees are sent to a new vault for the `operatorFee`: the [`OperatorFeeVault`](predeploys.md#operatorfeevault).
 
-Like the existing vaults, these are hardcoded addresses, pointing at pre-deployed proxy contracts.
-The proxies are backed by vault contract deployments, based on `FeeVault`, to route vault funds to L1 securely.
+Like the existing vaults, this is a hardcoded address, pointing at a pre-deployed proxy contract.
+The proxy is backed by a vault contract deployment, based on `FeeVault`, to route vault funds to L1 securely.
