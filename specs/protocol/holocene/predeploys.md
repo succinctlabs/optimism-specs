@@ -14,7 +14,7 @@
       - [`baseFeeVaultConfig`](#basefeevaultconfig)
       - [`sequencerFeeVaultConfig`](#sequencerfeevaultconfig)
       - [`l1FeeVaultConfig`](#l1feevaultconfig)
-      - [`configurableFeeVaultConfig`](#configurablefeevaultconfig)
+      - [`operatorFeeVaultConfig`](#operatorfeevaultconfig)
       - [`l1CrossDomainMessenger`](#l1crossdomainmessenger)
       - [`l1StandardBridge`](#l1standardbridge)
       - [`l1ERC721Bridge`](#l1erc721bridge)
@@ -149,12 +149,12 @@ This function MUST be called by the `L1FeeVault` to fetch network specific confi
 function l1FeeVaultConfig()(address,uint256,WithdrawalNetwork)
 ```
 
-##### `configurableFeeVaultConfig`
+##### `operatorFeeVaultConfig`
 
-This function MUST be called by the `ConfigurableFeeVault` to fetch network specific configuration.
+This function MUST be called by the `OperatorFeeVault` to fetch network specific configuration.
 
 ```solidity
-function configurableFeeVaultConfig()(address,uint256,WithdrawalNetwork)
+function operatorFeeVaultConfig()(address,uint256,WithdrawalNetwork)
 ```
 
 ##### `l1CrossDomainMessenger`
@@ -279,7 +279,7 @@ It uses the following values
 - `isHolocene`
 
 `operatorFeeScalar` and `operatorFeeConstant` are read from the `L1Block` contract, and `isHolocene`
-is read directly from storage.
+is read directly from storage. If `isHolocene` is false, then this function MUST return `0`.
 
 ```function
 function getOperatorFee(uint256 gasUsed)(uint256)

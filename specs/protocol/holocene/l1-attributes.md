@@ -25,7 +25,7 @@ The L1 block attributes transaction is updated to include the EIP-1559 parameter
 | l1BlockHash       | bytes32 | 100-131        | 4       |
 | batcherHash       | bytes32 | 132-163        | 5       |
 | operatorFeeScalar   | uint32  | 164-167      | 6       |
-| operatorFeeConstant | uint32  | 168-171      |         |
+| operatorFeeConstant | uint64  | 168-175      |         |
 
 In the first L2 block after the Holocene activation block, the Holocene L1 attributes are first used.
 
