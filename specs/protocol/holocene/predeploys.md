@@ -21,8 +21,8 @@
       - [`remoteChainId`](#remotechainid)
   - [FeeVault](#feevault)
     - [Interface](#interface-1)
+      - [`config`](#config)
   - [OperatorFeeVault](#operatorfeevault)
-    - [`config`](#config)
   - [L2CrossDomainMessenger](#l2crossdomainmessenger)
     - [Interface](#interface-2)
   - [L2ERC721Bridge](#l2erc721bridge)
@@ -31,6 +31,7 @@
     - [Interface](#interface-4)
   - [GasPriceOracle](#gaspriceoracle)
     - [Interface](#interface-5)
+      - [`setHolocene`](#setholocene-1)
       - [`getOperatorFee`](#getoperatorfee)
   - [OptimismMintableERC721Factory](#optimismmintableerc721factory)
 - [Security Considerations](#security-considerations)
@@ -253,13 +254,32 @@ The following functions are updated to read from the `L1Block` contract by calli
 ### GasPriceOracle
 
 In order to maintain accurate offchain fee estimation, the `GasPriceOracle` must be updated to allow users
-to estimate the operator fee.
+to estimate the operator fee. We also add a new boolean `isHolocene` to help with evaluating the operator fee.
 
 #### Interface
+
+##### `setHolocene`
+
+This function is meant to be called once on the activation block of the holocene network upgrade.
+It MUST only be callable by the `DEPOSITOR_ACCOUNT` once. When it is called, it MUST call
+call each getter for the network specific config and set the returndata into storage.
+
+```solidity
+function setHolocene() external;
+```
 
 ##### `getOperatorFee`
 
 This function calculates the operator fee based on the expected amount of gas used for a certain transaction.
+
+It uses the following values
+
+- `operatorFeeScalar`
+- `operatorFeeConstant`
+- `isHolocene`
+
+`operatorFeeScalar` and `operatorFeeConstant` are read from the `L1Block` contract, and `isHolocene`
+is read directly from storage.
 
 ```function
 function getOperatorFee(uint256 gasUsed)(uint256)
