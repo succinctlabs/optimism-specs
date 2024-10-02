@@ -84,7 +84,6 @@ The following actions should happen during the initialization of the `SystemConf
 - `emit ConfigUpdate.GAS_LIMIT`
 - `emit ConfigUpdate.UNSAFE_BLOCK_SIGNER`
 - `emit ConfigUpdate.EIP_1559_PARAMS`
-- `emit ConfigUpdate.OPERATOR_FEE_SCALARS`
 - `setConfig(SET_GAS_PAYING_TOKEN)`
 - `setConfig(SET_BASE_FEE_VAULT_CONFIG)`
 - `setConfig(SET_L1_FEE_VAULT_CONFIG)`
