@@ -11,13 +11,13 @@
   - [`ConfigUpdate`](#configupdate)
   - [Initialization](#initialization)
   - [Modifying EIP-1559 Parameters](#modifying-eip-1559-parameters)
-  - [Modifying Operator Fee Scalars](#modifying-operator-fee-scalars)
+  - [Modifying Operator Fee Parameters](#modifying-operator-fee-parameters)
   - [Interface](#interface)
     - [EIP-1559 Params](#eip-1559-params)
       - [`setEIP1559Params`](#seteip1559params)
       - [`eip1559Elasticity`](#eip1559elasticity)
       - [`eip1559Denominator`](#eip1559denominator)
-    - [Operator fee scalars](#operator-fee-scalars)
+    - [Operator fee parameters](#operator-fee-parameters)
       - [`operatorFeeScalar`](#operatorfeescalar)
       - [`operatorFeeConstant`](#operatorfeeconstant)
       - [`setOperatorFeeScalars`](#setoperatorfeescalars)
@@ -73,7 +73,7 @@ The following `ConfigUpdate` event is defined where the `CONFIG_VERSION` is `uin
 | `GAS_LIMIT` | `uint8(2)` | `abi.encode(uint64 _gasLimit)` | Modifies the L2 gas limit |
 | `UNSAFE_BLOCK_SIGNER` | `uint8(3)` | `abi.encode(address)` | Modifies the account that is authorized to progress the unsafe chain |
 | `EIP_1559_PARAMS` | `uint8(4)` | `uint256(uint64(uint32(_denominator))) << 32 \| uint64(uint32(_elasticity))` | Modifies the EIP-1559 denominator and elasticity |
-| `OPERATOR_FEE_SCALARS` | `uint8(5)` | `uint256(_operatorFeeScalar) << 64 \| _operatorFeeConstant` | Modifies the operator fee scalars |
+| `OPERATOR_FEE_SCALARS` | `uint8(5)` | `uint256(_operatorFeeScalar) << 64 \| _operatorFeeConstant` | Modifies the operator fee parameters |
 
 ### Initialization
 
@@ -102,7 +102,7 @@ A new `SystemConfig` `UpdateType` is introduced that enables the modification of
 [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559) parameters. This allows for the chain
 operator to modify the `BASE_FEE_MAX_CHANGE_DENOMINATOR` and the `ELASTICITY_MULTIPLIER`.
 
-### Modifying Operator Fee Scalars
+### Modifying Operator Fee Parameters
 
 A new `SystemConfig` `UpdateType` is introduced that enables the modification of
 the `operatorFeeScalar` and `operatorFeeConstant`. This allows the [`OperatorFeeManager`](#operator-fee-manager)
@@ -139,7 +139,7 @@ This function returns the currently configured EIP-1559 denominator.
 function eip1559Denominator()(uint64)
 ```
 
-#### Operator fee scalars
+#### Operator fee parameters
 
 ##### `operatorFeeScalar`
 

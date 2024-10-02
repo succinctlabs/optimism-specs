@@ -10,7 +10,7 @@
 
 ## Overview
 
-The L1 block attributes transaction is updated to include the Operator Fee scalars.
+The L1 block attributes transaction is updated to include the operator fee parameters.
 
 | Input arg         | Type    | Calldata bytes | Segment |
 | ----------------- | ------- | -------------- | ------- |

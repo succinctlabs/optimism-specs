@@ -20,8 +20,8 @@
   - [Encoding](#encoding)
   - [Rationale](#rationale-2)
 - [Fees](#fees)
-  - [Operator fees](#operator-fees)
-    - [Configuring scalars](#configuring-scalars)
+  - [Operator Fee](#operator-fee)
+    - [Configuring Scalars](#configuring-scalars)
   - [Fee Vaults](#fee-vaults)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -161,7 +161,7 @@ pricing model. To enable more customizable fee structures, Holocene adds a new c
 calculation: the `operatorFee`, which is parameterized by two scalars: the `operatorFeeScalar`
 and the `operatorFeeConstant`.
 
-### Operator fees
+### Operator Fee
 
 The operator fee, is set as follows:
 
@@ -173,7 +173,7 @@ Where:
 - `operatorFeeScalar` is a `uint32` scalar set by the chain operator, scaled by `1e6`.
 - `operatorFeeConstant` is a `uint64` scalar set by the chain operator.
 
-#### Configuring scalars
+#### Configuring Scalars
 
 `operatorFeeScalar` and `operatorFeeConstant` are loaded in a similar way to the `baseFeeScalar` and
 `blobBaseFeeScalar` used in the [`L1Fee`](../../protocol/exec-engine.md#ecotone-l1-cost-fee-changes-eip-4844-da).
