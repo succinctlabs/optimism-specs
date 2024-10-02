@@ -191,4 +191,5 @@ calculation. In more detail, these scalars can be accessed in two interchangable
 These collected fees are sent to a new vault for the `operatorFee`: the [`OperatorFeeVault`](predeploys.md#operatorfeevault).
 
 Like the existing vaults, this is a hardcoded address, pointing at a pre-deployed proxy contract.
-The proxy is backed by a vault contract deployment, based on `FeeVault`, to route vault funds to L1 securely.
+The proxy is backed by a vault contract deployment, based on `FeeVault`, to route vault funds to L1 securely. It is
+managed by the [`OperatorFeeVaultManager`](predeploys.md#operatorfeevaultmanager).

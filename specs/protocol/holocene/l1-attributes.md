@@ -10,7 +10,7 @@
 
 ## Overview
 
-The L1 block attributes transaction is updated to include the EIP-1559 parameters.
+The L1 block attributes transaction is updated to include the Operator Fee scalars.
 
 | Input arg         | Type    | Calldata bytes | Segment |
 | ----------------- | ------- | -------------- | ------- |

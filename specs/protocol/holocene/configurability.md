@@ -11,11 +11,16 @@
   - [`ConfigUpdate`](#configupdate)
   - [Initialization](#initialization)
   - [Modifying EIP-1559 Parameters](#modifying-eip-1559-parameters)
+  - [Modifying Operator Fee Scalars](#modifying-operator-fee-scalars)
   - [Interface](#interface)
     - [EIP-1559 Params](#eip-1559-params)
       - [`setEIP1559Params`](#seteip1559params)
       - [`eip1559Elasticity`](#eip1559elasticity)
       - [`eip1559Denominator`](#eip1559denominator)
+    - [Operator fee scalars](#operator-fee-scalars)
+      - [`operatorFeeScalar`](#operatorfeescalar)
+      - [`operatorFeeConstant`](#operatorfeeconstant)
+      - [`setOperatorFeeScalars`](#setoperatorfeescalars)
     - [Fee Vault Config](#fee-vault-config)
       - [`setBaseFeeVaultConfig`](#setbasefeevaultconfig)
       - [`setL1FeeVaultConfig`](#setl1feevaultconfig)
@@ -24,13 +29,18 @@
 - [`OptimismPortal`](#optimismportal)
   - [Interface](#interface-1)
     - [`setConfig`](#setconfig)
+- [Consensus Parameters](#consensus-parameters)
+  - [Operator Fee Scalar](#operator-fee-scalar)
+  - [Operator Fee Constant](#operator-fee-constant)
+- [Service Roles](#service-roles)
+  - [Operator Fee Manager](#operator-fee-manager)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Overview
 
 The `SystemConfig` and `OptimismPortal` are updated with a new flow for chain
-configurability.
+configurability. A new admin role `OperatorFeeManager` is added to manage the operator fee collection.
 
 ## Constants
 
@@ -59,10 +69,11 @@ The following `ConfigUpdate` event is defined where the `CONFIG_VERSION` is `uin
 | Name | Value | Definition | Usage |
 | ---- | ----- | --- | -- |
 | `BATCHER` | `uint8(0)` | `abi.encode(address)` | Modifies the account that is authorized to progress the safe chain |
-| `FEE_SCALARS` | `uint8(1)` | `(uint256(0x01) << 248) \| (uint256(_operatorFeeScalar) <<  108 \| (uint256(_operatorFeeConstant) << 96 \| (uint256(_blobBaseFeeScalar) << 32) \| _baseFeeScalar` | Modifies the fee scalars |
+| `FEE_SCALARS` | `uint8(1)` | `(uint256(0x01) << 248) \| (uint256(_blobBaseFeeScalar) << 32) \| _baseFeeScalar` | Modifies the fee scalars |
 | `GAS_LIMIT` | `uint8(2)` | `abi.encode(uint64 _gasLimit)` | Modifies the L2 gas limit |
 | `UNSAFE_BLOCK_SIGNER` | `uint8(3)` | `abi.encode(address)` | Modifies the account that is authorized to progress the unsafe chain |
 | `EIP_1559_PARAMS` | `uint8(4)` | `uint256(uint64(uint32(_denominator))) << 32 \| uint64(uint32(_elasticity))` | Modifies the EIP-1559 denominator and elasticity |
+| `OPERATOR_FEE_SCALARS` | `uint8(5)` | `uint256(_operatorFeeScalar) << 64 \| _operatorFeeConstant` | Modifies the operator fee scalars |
 
 ### Initialization
 
@@ -73,6 +84,7 @@ The following actions should happen during the initialization of the `SystemConf
 - `emit ConfigUpdate.GAS_LIMIT`
 - `emit ConfigUpdate.UNSAFE_BLOCK_SIGNER`
 - `emit ConfigUpdate.EIP_1559_PARAMS`
+- `emit ConfigUpdate.OPERATOR_FEE_SCALARS`
 - `setConfig(SET_GAS_PAYING_TOKEN)`
 - `setConfig(SET_BASE_FEE_VAULT_CONFIG)`
 - `setConfig(SET_L1_FEE_VAULT_CONFIG)`
@@ -90,6 +102,12 @@ These actions MAY only be triggered if there is a diff to the value.
 A new `SystemConfig` `UpdateType` is introduced that enables the modification of
 [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559) parameters. This allows for the chain
 operator to modify the `BASE_FEE_MAX_CHANGE_DENOMINATOR` and the `ELASTICITY_MULTIPLIER`.
+
+### Modifying Operator Fee Scalars
+
+A new `SystemConfig` `UpdateType` is introduced that enables the modification of
+the `operatorFeeScalar` and `operatorFeeConstant`. This allows the [`OperatorFeeManager`](#operator-fee-manager)
+to modify the `operatorFeeScalar` and `operatorFeeConstant`.
 
 ### Interface
 
@@ -120,6 +138,34 @@ This function returns the currently configured EIP-1559 denominator.
 
 ```solidity
 function eip1559Denominator()(uint64)
+```
+
+#### Operator fee scalars
+
+##### `operatorFeeScalar`
+
+This function returns the currently configured operator fee scalar.
+
+```solidity
+function operatorFeeScalar()(uint32)
+```
+
+##### `operatorFeeConstant`
+
+This function returns the currently configured operator fee constant.
+
+```solidity
+function operatorFeeConstant()(uint64)
+```
+
+##### `setOperatorFeeScalars`
+
+This function sets the `operatorFeeScalar` and `operatorFeeConstant`.
+
+This function MUST only be callable by the [`OperatorFeeManager`](#operator-fee-manager).
+
+```solidity
+function setOperatorFeeScalar(uint32 _operatorFeeScalar, uint64 _operatorFeeConstant)()
 ```
 
 #### Fee Vault Config
@@ -182,3 +228,28 @@ The following fields are included:
 - `version` is `uint256(0)`
 - `opaqueData` is the tightly packed transaction data where `mint` is `0`, `value` is `0`, the `gasLimit`
    is `200_000`, `isCreation` is `false` and the `data` is `abi.encodeCall(L1Block.setConfig, (_type, _value))`
+
+## Consensus Parameters
+
+### [Operator Fee Scalar](exec-engine.md#operator-fees)
+
+**Description:** Operator fee scalar -- used to calculate the operator fee<br/>
+**Administrator:** [Operator Fee Manager](#operator-fee-manager)<br/>
+**Requirement:** TODO <br/>
+**Notes:** <br/>
+
+### [Operator Fee Constant](exec-engine.md#operator-fees)
+
+**Description:** Operator fee constant -- used to calculate the operator fee<br/>
+**Administrator:** [Operator Fee Manager](#operator-fee-manager)<br/>
+**Requirement:** TODO <br/>
+**Notes:** <br/>
+
+## Service Roles
+
+### Operator Fee Manager
+
+**Description:** Account authorized to modify the operator fee scalars and collect the operator fees. <br/>
+**Administrator:** [System Config Owner](../configurability.md#system-config)<br/>
+**Requirement:** <br/>
+**Notes:** <br/>
