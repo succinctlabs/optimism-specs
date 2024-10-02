@@ -21,6 +21,7 @@
       - [`operatorFeeScalar`](#operatorfeescalar)
       - [`operatorFeeConstant`](#operatorfeeconstant)
       - [`setOperatorFeeScalars`](#setoperatorfeescalars)
+      - [`setOperatorFeeManager`](#setoperatorfeemanager)
     - [Fee Vault Config](#fee-vault-config)
       - [`setBaseFeeVaultConfig`](#setbasefeevaultconfig)
       - [`setL1FeeVaultConfig`](#setl1feevaultconfig)
@@ -73,7 +74,8 @@ The following `ConfigUpdate` event is defined where the `CONFIG_VERSION` is `uin
 | `GAS_LIMIT` | `uint8(2)` | `abi.encode(uint64 _gasLimit)` | Modifies the L2 gas limit |
 | `UNSAFE_BLOCK_SIGNER` | `uint8(3)` | `abi.encode(address)` | Modifies the account that is authorized to progress the unsafe chain |
 | `EIP_1559_PARAMS` | `uint8(4)` | `uint256(uint64(uint32(_denominator))) << 32 \| uint64(uint32(_elasticity))` | Modifies the EIP-1559 denominator and elasticity |
-| `OPERATOR_FEE_SCALARS` | `uint8(5)` | `uint256(_operatorFeeScalar) << 64 \| _operatorFeeConstant` | Modifies the operator fee parameters |
+| `OPERATOR_FEE_PARAMS` | `uint8(5)` | `uint256(_operatorFeeScalar) << 64 \| _operatorFeeConstant` | Modifies the operator fee parameters |
+| `OPERATOR_FEE_MANAGER` | `uint8(6)` | `abi.encode(address)` | Modifies the operator fee manager |
 
 ### Initialization
 
@@ -165,6 +167,16 @@ This function MUST only be callable by the [`OperatorFeeManager`](#operator-fee-
 
 ```solidity
 function setOperatorFeeScalar(uint32 _operatorFeeScalar, uint64 _operatorFeeConstant)()
+```
+
+##### `setOperatorFeeManager`
+
+This function sets the `operatorFeeManager`.
+
+This function MUST only be callable by the chain governor.
+
+```solidity
+function setOperatorFeeManager(address _operatorFeeManager)()
 ```
 
 #### Fee Vault Config
