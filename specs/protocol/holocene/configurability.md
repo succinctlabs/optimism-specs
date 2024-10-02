@@ -40,7 +40,7 @@
 ## Overview
 
 The `SystemConfig` and `OptimismPortal` are updated with a new flow for chain
-configurability. A new admin role `OperatorFeeManager` is added to manage the operator fee collection.
+configurability. A new service role `OperatorFeeManager` is added to manage the operator fee collection.
 
 ## Constants
 
@@ -249,7 +249,7 @@ The following fields are included:
 
 ### Operator Fee Manager
 
-**Description:** Account authorized to modify the operator fee scalars and collect the operator fees. <br/>
+**Description:** Account authorized to modify the operator fee scalar. <br/>
 **Administrator:** [System Config Owner](../configurability.md#system-config)<br/>
 **Requirement:** <br/>
 **Notes:** <br/>
