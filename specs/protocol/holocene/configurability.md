@@ -235,15 +235,13 @@ The following fields are included:
 
 **Description:** Operator fee scalar -- used to calculate the operator fee<br/>
 **Administrator:** [Operator Fee Manager](#operator-fee-manager)<br/>
-**Requirement:** TODO <br/>
-**Notes:** <br/>
+**Requirement:** Between 0 and 0.5 * (baseFee + priorityFee) <br/>
 
 ### [Operator Fee Constant](exec-engine.md#operator-fees)
 
 **Description:** Operator fee constant -- used to calculate the operator fee<br/>
 **Administrator:** [Operator Fee Manager](#operator-fee-manager)<br/>
-**Requirement:** TODO <br/>
-**Notes:** <br/>
+**Requirement:** Between 0 and 600 Gwei <br/>
 
 ## Service Roles
 
