@@ -99,13 +99,15 @@ These actions MAY only be triggered if there is a diff to the value.
 Since the `OperatorFeeVault` is new in Isthmus, the `setConfig(SET_OPERATOR_FEE_VAULT_CONFIG)` MUST be emitted.
 
 `ConfigUpdate.OPERATOR_FEE_PARAMS` and `ConfigUpdate.OPERATOR_FEE_MANAGER` MAY be emitted. If they are not emitted,
-the `operatorFeeScalar` and `operatorFeeConstant` are set to 0 by default, and the `OperatorFeeManager` is set to the chain governor by default.
+the `operatorFeeScalar` and `operatorFeeConstant` are set to 0 by default, and the `OperatorFeeManager`
+is set to the chain governor by default.
 
 ### Modifying Operator Fee Parameters
 
 A new `SystemConfig` `UpdateType` is introduced that enables the modification of
-the `operatorFeeScalar` and `operatorFeeConstant`. This allows the [`OperatorFeeManager`](#operator-fee-manager)
-to modify the `operatorFeeScalar` and `operatorFeeConstant`.
+the `operatorFeeScalar` and `operatorFeeConstant` by the [`OperatorFeeManager`](#operator-fee-manager).
+
+Another `UpdateType` is added to modify the [`OperatorFeeManager`].
 
 ### Interface
 

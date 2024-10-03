@@ -21,8 +21,9 @@ This document is not finalized and should be considered experimental.
 
 - [Isthmus Derivation](./derivation.md#isthmus-derivation)
 - [Configurability](./configurability.md)
+
 ## Smart Contracts
 
 - [SuperchainConfig](./superchain-config.md)
 - [Predeploys](./predeploys.md)
-- [L1 Block Attributes](./l1-attributes.md) 
+- [L1 Block Attributes](./l1-attributes.md)

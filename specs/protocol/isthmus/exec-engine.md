@@ -14,7 +14,7 @@
     - [Client Implementation Considerations](#client-implementation-considerations)
 - [Fees](#fees)
   - [Operator Fee](#operator-fee)
-    - [Configuring Scalars](#configuring-scalars)
+    - [Configuring Parameters](#configuring-parameters)
   - [Fee Vaults](#fee-vaults)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -80,6 +80,9 @@ an outbound withdrawal for a long period of time, the node may not have access t
 [`L2ToL1MessagePasser`][l2-to-l1-mp]. In this case, the client would be unable to keep consensus. However, most modern
 clients are able to at the very least reconstruct the account storage root at a given block on the fly if it does not
 directly store this information.
+
+[l2-to-l1-mp]: ../../protocol/predeploys.md#L2ToL1MessagePasser
+[output-root]: ../../glossary.md#l2-output-root
 
 ## Fees
 

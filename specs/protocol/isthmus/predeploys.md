@@ -290,7 +290,7 @@ function setIsthmus() external;
 
 This function calculates the operator fee based on the expected amount of gas used for a certain transaction.
 
-It uses the following values: 
+It uses the following values:
 
 - `operatorFeeScalar`
 - `operatorFeeConstant`

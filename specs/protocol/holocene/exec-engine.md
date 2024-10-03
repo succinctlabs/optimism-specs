@@ -15,10 +15,6 @@
     - [Header Validity Rules](#header-validity-rules)
     - [Encoding](#encoding)
     - [Rationale](#rationale-1)
-- [Fees](#fees)
-  - [Operator Fee](#operator-fee)
-    - [Configuring Scalars](#configuring-scalars)
-  - [Fee Vaults](#fee-vaults)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
