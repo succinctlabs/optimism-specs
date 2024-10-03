@@ -53,16 +53,14 @@
     - [Holocene](./protocol/holocene/overview.md)
       - [Derivation](./protocol/holocene/derivation.md)
       - [Execution Engine](./protocol/holocene/exec-engine.md)
-<<<<<<< HEAD
-      - [Predeploys](./protocol/holocene/predeploys.md)
-      - [Configurability](./protocol/holocene/configurability.md)
       - [System Config](./protocol/holocene/system-config.md)
-      - [L1 Attributes](./protocol/holocene/l1-attributes.md)
-
-=======
-      - [System Config](./protocol/holocene/system-config.md)
->>>>>>> main
-
+    - [Isthmus](./protocol/isthmus/overview.md)
+      - [Configurability](./protocol/isthmus/configurability.md)
+      - [Derivation](./protocol/isthmus/derivation.md)
+      - [Execution Engine](./protocol/isthmus/exec-engine.md)
+      - [L1 Attributes](./protocol/isthmus/l1-attributes.md)
+      - [Predeploys](./protocol/isthmus/predeploys.md)
+      - [Superchain Config](./protocol/isthmus/superchain-config.md)
 - [Governance]()
   - [Governance Token](./governance/gov-token.md)
 - [Experimental]()

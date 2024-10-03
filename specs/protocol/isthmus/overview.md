@@ -25,5 +25,4 @@ This document is not finalized and should be considered experimental.
 
 - [SuperchainConfig](./superchain-config.md)
 - [Predeploys](./predeploys.md)
-- [System Config](./system-config.md)
 - [L1 Block Attributes](./l1-attributes.md) 
