@@ -14,7 +14,7 @@ The L1 block attributes transaction is updated to include the operator fee param
 
 | Input arg         | Type    | Calldata bytes | Segment |
 | ----------------- | ------- | -------------- | ------- |
-| {0xd1fbe15b}      |         | 0-3            | n/a     |
+| {0x098999be}      |         | 0-3            | n/a     |
 | baseFeeScalar     | uint32  | 4-7            | 1       |
 | blobBaseFeeScalar | uint32  | 8-11           |         |
 | sequenceNumber    | uint64  | 12-19          |         |
@@ -27,10 +27,10 @@ The L1 block attributes transaction is updated to include the operator fee param
 | operatorFeeScalar   | uint32  | 164-167      | 6       |
 | operatorFeeConstant | uint64  | 168-175      |         |
 
-In the first L2 block after the Holocene activation block, the Holocene L1 attributes are first used.
+In the first L2 block after the Isthmus activation block, the Isthmus L1 attributes are first used.
 
-The pre-Holocene values are migrated over 1:1.
-Blocks after the Holocene activation block contain all pre-Holocene values 1:1,
+The pre-Isthmus values are migrated over 1:1.
+Blocks after the Isthmus activation block contain all pre-Isthmus values 1:1,
 and also set the following new attributes:
 
 - The `operatorFeeScalar` is set to `0`.

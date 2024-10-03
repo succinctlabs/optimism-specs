@@ -6,10 +6,12 @@
 
 - [Constants](#constants)
 - [Predeploys](#predeploys)
+  - [ProxyAdmin](#proxyadmin)
+    - [Rationale](#rationale)
   - [L1Block](#l1block)
     - [Storage](#storage)
     - [Interface](#interface)
-      - [`setHolocene`](#setholocene)
+      - [`setIsthmus`](#setisthmus)
       - [`setConfig`](#setconfig)
       - [`baseFeeVaultConfig`](#basefeevaultconfig)
       - [`sequencerFeeVaultConfig`](#sequencerfeevaultconfig)
@@ -31,7 +33,7 @@
     - [Interface](#interface-4)
   - [GasPriceOracle](#gaspriceoracle)
     - [Interface](#interface-5)
-      - [`setHolocene`](#setholocene-1)
+      - [`setIsthmus`](#setisthmus-1)
       - [`getOperatorFee`](#getoperatorfee)
   - [OptimismMintableERC721Factory](#optimismmintableerc721factory)
 - [Security Considerations](#security-considerations)
@@ -87,6 +89,20 @@ graph LR
   OptimismPortal -- "setConfig(uint8,bytes)" --> L1Block
 ```
 
+### ProxyAdmin
+
+The `ProxyAdmin` is updated to have its `owner` be the `DEPOSITOR_ACCOUNT`.
+This means that it can be deterministically called by network upgrade transactions
+or by special deposit transactions emitted by the `OptimismPortal` that assume
+the identity of the `DEPOSITOR_ACCOUNT`.
+
+#### Rationale
+
+It is much easier to manage the overall roles of the full system under this model.
+The owner of the `ProxyAdmin` can upgrade any of the predeploys, meaning it can
+write storage slots that correspond to withdrawals. This ensures that only the
+system or a chain governor can issue upgrades to the predeploys.
+
 ### L1Block
 
 #### Storage
@@ -107,7 +123,7 @@ via a deposit transaction from the `DEPOSITOR_ACCOUNT`.
 
 #### Interface
 
-##### `setHolocene`
+##### `setIsthmus`
 
 This function is meant to be called once on the activation block of the holocene network upgrade.
 It MUST only be callable by the `DEPOSITOR_ACCOUNT` once. When it is called, it MUST call
@@ -256,32 +272,32 @@ The following functions are updated to read from the `L1Block` contract by calli
 ### GasPriceOracle
 
 In order to maintain accurate offchain fee estimation, the `GasPriceOracle` must be updated to allow users
-to estimate the operator fee. We also add a new boolean `isHolocene` to help with evaluating the operator fee.
+to estimate the operator fee. We also add a new boolean `isIsthmus` to help with evaluating the operator fee.
 
 #### Interface
 
-##### `setHolocene`
+##### `setIsthmus`
 
-This function is meant to be called once on the activation block of the holocene network upgrade.
+This function is meant to be called once on the activation block of the isthmus network upgrade.
 It MUST only be callable by the `DEPOSITOR_ACCOUNT` once. When it is called, it MUST call
 call each getter for the network specific config and set the returndata into storage.
 
 ```solidity
-function setHolocene() external;
+function setIsthmus() external;
 ```
 
 ##### `getOperatorFee`
 
 This function calculates the operator fee based on the expected amount of gas used for a certain transaction.
 
-It uses the following values
+It uses the following values: 
 
 - `operatorFeeScalar`
 - `operatorFeeConstant`
-- `isHolocene`
+- `isIsthmus`
 
-`operatorFeeScalar` and `operatorFeeConstant` are read from the `L1Block` contract, and `isHolocene`
-is read directly from storage. If `isHolocene` is false, then this function MUST return `0`.
+`operatorFeeScalar` and `operatorFeeConstant` are read from the `L1Block` contract, and `isIsthmus`
+is read directly from storage. If `isIsthmus` is false, then this function MUST return `0`.
 
 ```function
 function getOperatorFee(uint256 gasUsed)(uint256)
